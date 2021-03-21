@@ -22,7 +22,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _productService.GetAllProductsAsync();
+            var result = await _productService.GetProductsByIdBrandAndTypesAsync();
             if (result.Success)
             {
                 return Ok(result.Data);

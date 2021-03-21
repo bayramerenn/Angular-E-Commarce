@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entites.Concrete
 {
-    public class ProductBrand : BaseEntity
+    public class Brand : BaseEntity
     {
         public string Name { get; set; }
     }

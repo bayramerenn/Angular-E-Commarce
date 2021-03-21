@@ -13,10 +13,14 @@ namespace WebApi.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IBrandService _brandService;
+        private readonly IProductTypeService _productTypeService;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IBrandService brandService, IProductTypeService productTypeService)
         {
             _productService = productService;
+            _brandService = brandService;
+            _productTypeService = productTypeService;
         }
 
         [HttpGet]
@@ -31,12 +35,18 @@ namespace WebApi.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("brands")]
+        public async Task<IActionResult> GetBrands()
         {
-            throw new Exception();
+            var result = await _brandService.GetBrandsAsync();
+            return Ok(result.Data);
+        }
 
-            return BadRequest();
+        [HttpGet("types")]
+        public async Task<IActionResult> GetTypes()
+        {
+            var result = await _productTypeService.GetProductTypesAsync();
+            return Ok(result.Data);
         }
 
     }

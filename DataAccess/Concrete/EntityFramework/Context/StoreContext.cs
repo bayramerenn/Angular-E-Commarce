@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework.Context
         }
 
         public DbSet<Product> Products{ get; set; }
-        public DbSet<ProductBrand> ProductBrands{ get; set; }
+        public DbSet<Brand> ProductBrands{ get; set; }
         public DbSet<ProductType> ProductTypes{ get; set; }
     }
 }

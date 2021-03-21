@@ -9,6 +9,6 @@ namespace Entites.Dtos
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
         public int Count { get; set; }
-        public List<ProductsDto> ProductsDtos { get; set; }
+        public List<ProductsDto> Data { get; set; }
     }
 }

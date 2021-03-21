@@ -1,1 +1,48 @@
-<p>shop works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+
+            <select class="custom-select" aria-label="Default select example">
+                <option selected>Alphabetical</option>
+                <option>Price : Low to High</option>
+                <option>Price : High to Low</option>
+                <option>Three</option>
+            </select>
+
+
+            <h5 class="text-secodary">Brands</h5>
+            <ul class="list-group">
+                <li class="list-group-item active" aria-current="true">An active item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">A fourth item</li>
+                <li class="list-group-item">And a fifth one</li>
+            </ul>
+            <h5 class="text-secodary mt-2">Types</h5>
+            <ul class="list-group">
+                <li class="list-group-item active" aria-current="true">An active item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">A fourth item</li>
+                <li class="list-group-item">And a fifth one</li>
+            </ul>
+        </div>
+        <section class="col-9">
+            <div class="d-flex justify-content-between align-items-center pb-2">
+                <header>
+                    <span>Showing <strong>10</strong> of <strong>18</strong> Results </span>
+                </header>
+                <div class="form-inline mt-2">
+                    <input type="text" class="form-control" placeholder="Search" style="width: 300px;">
+                    <button type="submit" class="btn btn-outline-primary ml-2">Search</button>
+                    <button type="submit" class="btn btn-outline-success ml-2">Reset</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 mb-4" *ngFor="let item of products">
+                    <app-product-item [product]="item"></app-product-item>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

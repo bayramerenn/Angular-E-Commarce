@@ -1,7 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from './models/IProduct';
-import { IPagenation } from './models/IPagenation';
 
 @Component({
   selector: 'app-root',
@@ -10,20 +7,12 @@ import { IPagenation } from './models/IPagenation';
 })
 export class AppComponent implements OnInit {
 
-  products:IPagenation;
-  para:IProduct[] = [];
 
-  constructor(private http:HttpClient) {
+
+  constructor() {
     
   }
   ngOnInit(): void {
-      this.http.get<IPagenation>("https://localhost:5001/api/products")
-        .subscribe(response => {
-          this.products = response;
-          console.log(this.products)
-        },error => {
-          console.error(error)
-        })
   }
 
   title = 'client';

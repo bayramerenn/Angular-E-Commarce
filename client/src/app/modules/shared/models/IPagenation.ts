@@ -4,5 +4,5 @@ export interface IPagenation {
     pageIndex: number;
     pageSize: number;
     count: number;
-    productsDtos: IProduct[];
+    data: IProduct[];
 }

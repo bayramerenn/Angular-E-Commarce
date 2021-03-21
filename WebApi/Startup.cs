@@ -61,6 +61,7 @@ namespace WebApi
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "E-Commerce API"));
             // app.AddProductExceptionHandling(loggerFactory);
             app.ConfigureCustomExceptionMiddleware();
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 

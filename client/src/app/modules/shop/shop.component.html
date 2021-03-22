@@ -11,13 +11,14 @@
             <h5 class="text-secodary">Brands</h5>
             <ul class="list-group">
                 <li class="list-group-item" aria-current="true" *ngFor="let brand of brands"
-                    (click)="onBrandSelected(brand.id)" [class.active]="brandIdSelected === brand.id"
+                    (click)="onBrandSelected(brand.id)" [class.active]="shopParams.brandId == brand.id"
                     [value]="brand.id">{{brand.name}}</li>
             </ul>
             <h5 class="text-secodary mt-2">Types</h5>
             <ul class="list-group">
                 <li class="list-group-item" aria-current="true" *ngFor="let type of types"
-                    [class.active]="typeIdSelected == type.id" [value]="type.id" (click)="onTypeSelected(type.id)">
+                    [class.active]="shopParams.typeId == type.id" 
+                    [value]="type.id" (click)="onTypeSelected(type.id)">
                     {{type.name}}</li>
             </ul>
         </div>
@@ -38,8 +39,16 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center">
-                <pagination [boundaryLinks]="true" [totalItems]="77" previousText="&lsaquo;" nextText="&rsaquo;"
-                    firstText="&laquo;" lastText="&raquo;">
+                <pagination 
+                [boundaryLinks]="true" 
+                [totalItems]="totalCount" 
+                (pageChanged)="onPageChanged($event)"
+                [itemsPerPage]="shopParams.pageSize"
+                previousText="&lsaquo;" 
+                nextText="&rsaquo;"
+                firstText="&laquo;" 
+                lastText="&raquo;"
+                >
 
                 </pagination>
             </div>

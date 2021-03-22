@@ -42,13 +42,13 @@ namespace Business.Concrete
             {
                 var value = item.GetValue(productParamsDto, null);
 
-                if (value != null && item.Name != "Sort")
+                if (value != null && item.Name != "Sort" && item.Name != "PageIndex" && item.Name != "PageSize")
                 {
                     filters += $"AND {item.Name}={item.GetValue(productParamsDto)}";
                 }
-                if (item.Name == "Sort")
+                if (item.Name == "Sort" )
                 {
-                    var ordersType = item.GetValue(productParamsDto).ToString();
+                    var ordersType = item.GetValue(productParamsDto,null);
                     switch (ordersType)
                     {
                         case "priceAsc":
@@ -65,19 +65,24 @@ namespace Business.Concrete
                 }
 
             }
-           
-            var data = await _productDal.GetProductsByIdBrandAndTypesAsync(productParamsDto, filters);
+
+            
+
+            var result = await _productDal.GetProductsByIdBrandAndTypesAsync(productParamsDto, filters);
+            var data = result.Skip(productParamsDto.PageSize * (productParamsDto.PageIndex - 1)).Take(productParamsDto.PageSize).ToList();
+
             foreach (var item in data)
             {
                 item.PictureUrl =  item.PictureUrl.Insert(0, _apiUrl);
             }
             var productPaginationDto = new ProductPaginationDto
             {
-                Count = data.Count,
-                PageIndex = 1,
-                PageSize = 6,
+                Count = result.Count,
                 Data = data.ToList(),
+                PageIndex = productParamsDto.PageIndex,
+                PageSize = productParamsDto.PageSize
             };
+
             return new SuccessDataResult<ProductPaginationDto>(productPaginationDto);
         }
     }

@@ -2,17 +2,15 @@
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entites.Concrete;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
     public class ProductTypeManager : IProductTypeService
     {
-        private readonly IProductTypeDal  _productTypeDal;
+        private readonly IProductTypeDal _productTypeDal;
 
         public ProductTypeManager(IProductTypeDal productTypeDal)
         {
@@ -25,6 +23,6 @@ namespace Business.Concrete
 
             return new SuccessDataResult<List<ProductType>>(result.ToList());
         }
-      
+
     }
 }

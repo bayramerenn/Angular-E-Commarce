@@ -21,7 +21,7 @@ namespace Business.Concrete
         {
             _productDal = productDal;
             Configuration = configuration;
-            
+            _apiUrl = Configuration["ApiUrl"];
         }
 
         public async Task<IDataResult<List<Product>>> GetAllProductsAsync()
@@ -30,11 +30,43 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(data.ToList());
         }
 
-        public async Task<IDataResult<ProductPaginationDto>> GetProductsByIdBrandAndTypesAsync()
+        public async Task<IDataResult<ProductPaginationDto>> GetProductsByIdBrandAndTypesAsync(ProductParamsDto productParamsDto)
         {
 
-            _apiUrl = Configuration["ApiUrl"];
-            var data = await _productDal.GetProductsByIdBrandAndTypesAsync();
+
+            string filters = "WHERE 1 = 1 ";
+
+            Type type = productParamsDto.GetType();
+
+            foreach (var item in type.GetProperties())
+            {
+                var value = item.GetValue(productParamsDto, null);
+
+                if (value != null && item.Name != "Sort")
+                {
+                    filters += $"AND {item.Name}={item.GetValue(productParamsDto)}";
+                }
+                if (item.Name == "Sort")
+                {
+                    var ordersType = item.GetValue(productParamsDto).ToString();
+                    switch (ordersType)
+                    {
+                        case "priceAsc":
+                            filters += $"ORDER BY Products.Price ASC";
+                            break;
+                        case "priceDesc":
+                            filters += $"ORDER BY Products.Price DESC";
+                            break;
+                        default:
+                            filters += $"ORDER BY Products.Name ASC";
+                            break;
+                    }
+
+                }
+
+            }
+           
+            var data = await _productDal.GetProductsByIdBrandAndTypesAsync(productParamsDto, filters);
             foreach (var item in data)
             {
                 item.PictureUrl =  item.PictureUrl.Insert(0, _apiUrl);

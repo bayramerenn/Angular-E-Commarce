@@ -1,4 +1,5 @@
 ﻿using Entites.Concrete;
+using Entites.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<Product> Products{ get; set; }
         public DbSet<Brand> ProductBrands{ get; set; }
         public DbSet<ProductType> ProductTypes{ get; set; }
+        public DbSet<ProductsDto> ProductsDtos{ get; set; }
     }
 }

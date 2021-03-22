@@ -10,6 +10,6 @@ namespace DataAccess.Abstract
 {
     public interface IProductDal:IEntityRepository<Product>
     {
-        Task<IList<ProductsDto>> GetProductsByIdBrandAndTypesAsync();
+        Task<IList<ProductsDto>> GetProductsByIdBrandAndTypesAsync(ProductParamsDto productParamsDto,string filters);
     }
 }

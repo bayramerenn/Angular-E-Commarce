@@ -11,6 +11,6 @@ namespace Business.Abstract
     public interface IProductService
     {
         Task<IDataResult<List<Product>>> GetAllProductsAsync();
-        Task<IDataResult<ProductPaginationDto>> GetProductsByIdBrandAndTypesAsync();
+        Task<IDataResult<ProductPaginationDto>> GetProductsByIdBrandAndTypesAsync(ProductParamsDto productParamsDto);
     }
 }

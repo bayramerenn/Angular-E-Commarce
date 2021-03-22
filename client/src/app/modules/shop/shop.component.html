@@ -2,25 +2,23 @@
     <div class="row">
         <div class="col-3">
 
-            <select class="custom-select" aria-label="Default select example">
-                <option selected>Alphabetical</option>
-                <option>Price : Low to High</option>
-                <option>Price : High to Low</option>
-                <option>Three</option>
+            <select class="custom-select" aria-label="Default select example" #orders
+                (change)="onSortSelected(orders.value)">
+                <option *ngFor="let sort of sortOptions" [value]="sort.value">{{sort.name}}</option>
             </select>
 
 
             <h5 class="text-secodary">Brands</h5>
             <ul class="list-group">
-                <li class="list-group-item" aria-current="true"
-                *ngFor="let brand of brands"
-                >{{brand.name}}</li>
+                <li class="list-group-item" aria-current="true" *ngFor="let brand of brands"
+                    (click)="onBrandSelected(brand.id)" [class.active]="brandIdSelected === brand.id"
+                    [value]="brand.id">{{brand.name}}</li>
             </ul>
             <h5 class="text-secodary mt-2">Types</h5>
             <ul class="list-group">
-                <li class="list-group-item" aria-current="true"
-                *ngFor="let type of types"
-                >{{type.name}}</li>
+                <li class="list-group-item" aria-current="true" *ngFor="let type of types"
+                    [class.active]="typeIdSelected == type.id" [value]="type.id" (click)="onTypeSelected(type.id)">
+                    {{type.name}}</li>
             </ul>
         </div>
         <section class="col-9">
@@ -39,6 +37,13 @@
                     <app-product-item [product]="item"></app-product-item>
                 </div>
             </div>
+            <div class="d-flex justify-content-center">
+                <pagination [boundaryLinks]="true" [totalItems]="77" previousText="&lsaquo;" nextText="&rsaquo;"
+                    firstText="&laquo;" lastText="&raquo;">
+
+                </pagination>
+            </div>
+
         </section>
     </div>
 </div>

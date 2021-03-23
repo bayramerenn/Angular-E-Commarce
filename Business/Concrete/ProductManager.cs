@@ -42,7 +42,7 @@ namespace Business.Concrete
             {
                 var value = item.GetValue(productParamsDto, null);
 
-                if (value != null && item.Name == "ProductBrandId" && item.Name == "ProductTypeId")
+                if (value != null && (item.Name == "ProductBrandId" || item.Name == "ProductTypeId"))
                 {
                     filters += $"AND {item.Name}={item.GetValue(productParamsDto)}";
                 }

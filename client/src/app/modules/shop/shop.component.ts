@@ -18,6 +18,7 @@ export class ShopComponent implements OnInit {
   shopParams = new ShopParams();
   totalCount:number = 0;
   lastPage:number;
+  searchSelected:string;
 
 
   sortOptions = [
@@ -43,6 +44,7 @@ export class ShopComponent implements OnInit {
       this.shopParams.pageSize = response?.pageSize as number;
       this.totalCount = response?.count as number;
       this.lastPage = this.shopParams.pageSize * this.shopParams.pageNumber
+      this.shopParams.search = "";
       console.log(response)
     }, err => console.log(err));
   }
@@ -79,7 +81,10 @@ export class ShopComponent implements OnInit {
     this.shopParams.pageNumber = event;
     this.getProdcuts();
   }
-
+  onSearch(search:string){
+    this.shopParams.search = search;
+    this.getProdcuts();
+  }
 
 
 }

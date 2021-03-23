@@ -17,6 +17,8 @@ export class ShopComponent implements OnInit {
   types: IType[];
   shopParams = new ShopParams();
   totalCount:number = 0;
+  lastPage:number;
+
 
   sortOptions = [
     {name:"Alphabetical",value:"name"},
@@ -40,6 +42,7 @@ export class ShopComponent implements OnInit {
       this.shopParams.pageNumber = response?.pageIndex as number;
       this.shopParams.pageSize = response?.pageSize as number;
       this.totalCount = response?.count as number;
+      this.lastPage = this.shopParams.pageSize * this.shopParams.pageNumber
       console.log(response)
     }, err => console.log(err));
   }
@@ -72,7 +75,11 @@ export class ShopComponent implements OnInit {
   }
 
   onPageChanged(event:any){
-    this.shopParams.pageNumber = event.page;
+    console.log("event")
+    this.shopParams.pageNumber = event;
     this.getProdcuts();
   }
+
+
+
 }

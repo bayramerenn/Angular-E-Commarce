@@ -42,31 +42,33 @@ namespace Business.Concrete
             {
                 var value = item.GetValue(productParamsDto, null);
 
-                if (value != null && item.Name != "Sort" && item.Name != "PageIndex" && item.Name != "PageSize")
+                if (value != null && item.Name == "ProductBrandId" && item.Name == "ProductTypeId")
                 {
                     filters += $"AND {item.Name}={item.GetValue(productParamsDto)}";
                 }
-                if (item.Name == "Sort" )
-                {
-                    var ordersType = item.GetValue(productParamsDto,null);
-                    switch (ordersType)
-                    {
-                        case "priceAsc":
-                            filters += $"ORDER BY Products.Price ASC";
-                            break;
-                        case "priceDesc":
-                            filters += $"ORDER BY Products.Price DESC";
-                            break;
-                        default:
-                            filters += $"ORDER BY Products.Name ASC";
-                            break;
-                    }
-
-                }
-
             }
 
-            
+            if (productParamsDto.Search != null)
+            {
+                filters += $"AND Products.Name LIKE '{productParamsDto.Search}%' ";
+            }
+
+            if (productParamsDto.Sort != null)
+            {
+                switch (productParamsDto.Sort)
+                {
+                    case "priceAsc":
+                        filters += $"ORDER BY Products.Price ASC";
+                        break;
+                    case "priceDesc":
+                        filters += $"ORDER BY Products.Price DESC";
+                        break;
+                    default:
+                        filters += $"ORDER BY Products.Name ASC";
+                        break;
+                }
+            }
+
 
             var result = await _productDal.GetProductsByIdBrandAndTypesAsync(productParamsDto, filters);
             var data = result.Skip(productParamsDto.PageSize * (productParamsDto.PageIndex - 1)).Take(productParamsDto.PageSize).ToList();

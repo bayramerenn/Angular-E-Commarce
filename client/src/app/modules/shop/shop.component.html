@@ -17,16 +17,18 @@
             <h5 class="text-secodary mt-2">Types</h5>
             <ul class="list-group">
                 <li class="list-group-item" aria-current="true" *ngFor="let type of types"
-                    [class.active]="shopParams.typeId == type.id" 
-                    [value]="type.id" (click)="onTypeSelected(type.id)">
+                    [class.active]="shopParams.typeId == type.id" [value]="type.id" (click)="onTypeSelected(type.id)">
                     {{type.name}}</li>
             </ul>
         </div>
         <section class="col-9">
             <div class="d-flex justify-content-between align-items-center pb-2">
-                <header>
-                    <span>Showing <strong>10</strong> of <strong>18</strong> Results </span>
-                </header>
+                <app-paging-header 
+                [totalCount]="totalCount"
+                [lastPage]="lastPage"
+                [pageSize]="shopParams.pageSize"
+                [pageNumber]="shopParams.pageNumber"
+                ></app-paging-header>
                 <div class="form-inline mt-2">
                     <input type="text" class="form-control" placeholder="Search" style="width: 300px;">
                     <button type="submit" class="btn btn-outline-primary ml-2">Search</button>
@@ -38,21 +40,13 @@
                     <app-product-item [product]="item"></app-product-item>
                 </div>
             </div>
-            <div class="d-flex justify-content-center">
-                <pagination 
-                [boundaryLinks]="true" 
-                [totalItems]="totalCount" 
+            <div class="d-flex justify-content-center" *ngIf="totalCount > 0">
+                <app-pager
                 (pageChanged)="onPageChanged($event)"
-                [itemsPerPage]="shopParams.pageSize"
-                previousText="&lsaquo;" 
-                nextText="&rsaquo;"
-                firstText="&laquo;" 
-                lastText="&raquo;"
-                >
-
-                </pagination>
+                [totalCount]="totalCount"
+                [pageSize]="shopParams.pageSize"
+                ></app-pager>
             </div>
-
         </section>
     </div>
 </div>

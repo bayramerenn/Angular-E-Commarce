@@ -10,3 +10,13 @@
     top: -10px;
     right: 30px;
 }
+.nav-link.active{
+    background-color: #bdbdbd;
+}
+
+.logo{
+    cursor: pointer;
+}
+.logo:focus{
+    outline: none;
+}

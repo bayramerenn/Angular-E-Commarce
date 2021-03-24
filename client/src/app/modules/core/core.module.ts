@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreComponent } from './core.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { RouterModule } from '@angular/router';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
 
 
 
 @NgModule({
   declarations: [
-    CoreComponent,
-    NavBarComponent
+    NavBarComponent,
+    NotFoundComponent,
+    ServerErrorComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports:[NavBarComponent] //! bunu açmazsan AppModule yayınlayamazsın
 })

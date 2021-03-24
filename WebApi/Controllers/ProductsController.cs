@@ -25,9 +25,21 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery]ProductParamsDto productParamsDto)
+        public async Task<IActionResult> GetAll([FromQuery] ProductParamsDto productParamsDto)
         {
             var result = await _productService.GetProductsByIdBrandAndTypesAsync(productParamsDto);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.Message);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            var result = await _productService.GetProductByIdAsync(id);
             if (result.Success)
             {
                 return Ok(result.Data);

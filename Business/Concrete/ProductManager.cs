@@ -87,5 +87,13 @@ namespace Business.Concrete
 
             return new SuccessDataResult<ProductPaginationDto>(productPaginationDto);
         }
+
+        public async Task<IDataResult<Product>> GetProductByIdAsync(int id)
+        {
+            var result =await _productDal.GetByIdAsync(id);
+            result.PictureUrl = result.PictureUrl.Insert(0, _apiUrl);
+
+            return new SuccessDataResult<Product>(result);
+        }
     }
 }

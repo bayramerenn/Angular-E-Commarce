@@ -6,6 +6,7 @@ import { IPagenation } from '../shared/models/IPagenation';
 import { IType } from '../shared/models/IProductType';
 import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
+import { IProduct } from '../shared/models/IProduct';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,9 @@ export class ShopService {
   constructor(private http: HttpClient) { }
 
 
+  getProduct(id:number):Observable<IProduct>{
+    return this.http.get<IProduct>(this.baseUrl +'products/'+id)
+  }
 
   getProducts(shopParams: ShopParams) {
     let params = new HttpParams();

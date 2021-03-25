@@ -42,9 +42,12 @@ namespace WebApi
                  });
             });
 
+            var data = Configuration.GetSection("Redis");
+
             services.AddSingleton<IConnectionMultiplexer>(x =>
             {
-                var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);
+                
+                var configuration = ConfigurationOptions.Parse(Configuration.GetSection("Redis").Value, true);
                 return ConnectionMultiplexer.Connect(configuration);
             });
 

@@ -5,10 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './components/products/products.component';
 
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { CoreModule } from './modules/core/core.module';
 import { ShopModule } from './modules/shop/shop.module';
 import { HomeModule } from './modules/home/home.module';
+import { ErrorInterceptor } from './modules/core/interceptors/error-interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,9 @@ import { HomeModule } from './modules/home/home.module';
     ShopModule,
     HomeModule
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true}
+  ],
   bootstrap: [
     AppComponent
   ]

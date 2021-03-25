@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container pt-5">
     <div class="row">
-        <div class="col-3">
+        <section class="col-3">
 
             <select class="custom-select" aria-label="Default select example" #orders
                 (change)="onSortSelected(orders.value)">
@@ -20,7 +20,7 @@
                     [class.active]="shopParams.typeId == type.id" [value]="type.id" (click)="onTypeSelected(type.id)">
                     {{type.name}}</li>
             </ul>
-        </div>
+        </section>
         <section class="col-9">
             <div class="d-flex justify-content-between align-items-center pb-2">
                 <app-paging-header 
@@ -29,7 +29,7 @@
                 [pageSize]="shopParams.pageSize"
                 [pageNumber]="shopParams.pageNumber"
                 ></app-paging-header>
-                <div class="form-inline mt-2">
+                <div class="form-inline">
                     <input type="text" class="form-control" #search placeholder="Search" style="width: 300px;" (keyup)="onSearch(search.value)">
                     <!-- <button type="submit" class="btn btn-outline-primary ml-2">Search</button>
                     <button type="submit" class="btn btn-outline-success ml-2">Reset</button> -->

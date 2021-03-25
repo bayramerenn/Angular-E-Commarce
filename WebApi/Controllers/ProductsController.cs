@@ -62,5 +62,17 @@ namespace WebApi.Controllers
             return Ok(result.Data);
         }
 
+        [HttpGet("servererror")]
+        public IActionResult ServerErrors()
+        {
+           
+            return StatusCode(500);
+        }
+        [HttpGet("badrequest")]
+        public IActionResult BadRequests()
+        {
+            return BadRequest();
+        }
+
     }
 }

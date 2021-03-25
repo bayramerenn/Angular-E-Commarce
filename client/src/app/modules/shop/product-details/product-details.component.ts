@@ -1,9 +1,9 @@
-import { templateJitUrl } from '@angular/compiler';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct } from '../../shared/models/IProduct';
 import { ShopService } from '../shop.service';
-
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-product-details',
@@ -16,7 +16,7 @@ export class ProductDetailsComponent implements OnInit {
 
   product: IProduct;
   selectId: number;
-  constructor(private route: ActivatedRoute, private service: ShopService) {
+  constructor(private route: ActivatedRoute, private service: ShopService,private breadcrumbService: BreadcrumbService) {
 
 
   }
@@ -34,7 +34,11 @@ export class ProductDetailsComponent implements OnInit {
       }
     )
     this.service.getProduct(this.selectId).subscribe(
-      response => this.product = response
+      response => {
+        this.product = response
+        this.breadcrumbService.set("@shopDetail",this.product.name)
+        
+      }
     )
   }
 }

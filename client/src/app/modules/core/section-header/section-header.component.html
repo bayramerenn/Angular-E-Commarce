@@ -1,0 +1,20 @@
+<ng-container *ngIf="(breadCrumb$ | async)">
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-9">
+                    <h1>Başlık</h1>
+                </div>
+                <div class="col-3">
+                    <!-- <xng-breadcrumb separator=">"></xng-breadcrumb> -->
+                    <xng-breadcrumb>
+                        <ng-container *xngBreadcrumbItem="let breadcrumb">
+                            <ng-container>{{ breadcrumb | titlecase }}</ng-container>
+                        </ng-container>
+                    </xng-breadcrumb>
+                </div>
+            </div>
+        </div>
+    </section>
+</ng-container>

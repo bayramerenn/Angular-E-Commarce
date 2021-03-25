@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Business.Abstract;
 using Business.Concrete;
+using Core.DataAccess.Redis;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using System;
@@ -21,6 +22,8 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<EfProductTypeDal>().As<IProductTypeDal>();
             builder.RegisterType<ProductTypeManager>().As<IProductTypeService>();
+
+            builder.RegisterType<BasketRepository>().As<IBasketRepository>();
         }
     }
 }
